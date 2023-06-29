@@ -1,7 +1,7 @@
 # fonselp-e2e-tests
 
 <p align="center">
-  <img src="images/FONSELP_BLUE_TRANSBG.PNG" width="800" height="250"/>
+  <img src="images/FonselpImg.PNG" width="800" height="250"/>
 </p>
 
 Fonselp-e2e-tests is a TypeScript-based Playwright project that uses the Page Object Model to test swag labs page. This project currently serves as a proof of concept for automated testing using Playwright.
