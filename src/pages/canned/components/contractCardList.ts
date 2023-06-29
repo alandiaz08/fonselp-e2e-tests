@@ -2,9 +2,9 @@ import {BaseComponent} from "../../base/baseComponent";
 import {Locator, Page} from "@playwright/test";
 
 /**
- * Class for checkoutOverviewResultList
+ * Class for contractCardList
  */
-export class checkoutOverviewResultList extends BaseComponent {
+export class contractCardList extends BaseComponent {
     private readonly checkoutOverviewListItems: Locator;
     private container;
 
@@ -16,17 +16,17 @@ export class checkoutOverviewResultList extends BaseComponent {
     constructor(page: Page, container: Locator) {
         super(page);
         this.container = container;
-        this.checkoutOverviewListItems = this.container.locator('[class="cart_item"]');
+        this.checkoutOverviewListItems = this.container.locator('[class="card__container__columns"] > div');
     }
 
-    async getCheckoutOverviewProductsItems(): Promise<Locator[]> {
+    async getContractCardItems(): Promise<Locator[]> {
         return this.checkoutOverviewListItems.all();
     }
 
-    async getCheckoutOverviewProductsByIndex(index): Promise<Locator> {
-        const productItems = await this.getCheckoutOverviewProductsItems();
-        if (index >= 0 && index < productItems.length) {
-            return productItems[index]
+    async getContractCardItemsByIndex(index): Promise<Locator> {
+        const contractCardItems = await this.getContractCardItems();
+        if (index >= 0 && index < contractCardItems.length) {
+            return contractCardItems[index]
         } else {
             throw new Error(`Invalid index: ${index}`);
         }

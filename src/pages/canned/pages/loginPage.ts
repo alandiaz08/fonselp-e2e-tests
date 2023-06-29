@@ -8,19 +8,26 @@ import { env } from "../../../../load-env";
  */
 export class loginPage extends basePage {
     private readonly userInput: Locator;
+    private readonly nextButton: Locator;
+    private readonly signUpNowButton: Locator;
     private readonly passwordInput: Locator;
+    private readonly iForgotMyPasswordButton: Locator;
     private readonly loginButton: Locator;
-    private readonly lockedMessage: Locator;
+    private readonly backButton: Locator;
+
 
     /**
      * Constructor of the login page
      */
     constructor(page: Page) {
         super(page);
-        this.userInput = page.locator('[data-test="username"]')
-        this.passwordInput = page.locator('[data-test="password"]')
-        this.loginButton = page.locator('[data-test="login-button"]')
-        this.lockedMessage = page.locator('[data-test="error"]')
+        this.userInput = page.locator('[name="email"]')
+        this.nextButton = page.locator('div:nth-child(5) > button')
+        this.signUpNowButton = page.locator('div > a')
+        this.passwordInput = page.locator('[name="password"]')
+        this.iForgotMyPasswordButton = page.locator('[class="password-wrapper mt-4"] + a')
+        this.loginButton = page.locator('button:nth-child(2)')
+        this.backButton = page.locator('button:nth-child(1)')
     }
 
     /**
@@ -40,6 +47,7 @@ export class loginPage extends basePage {
      * @returns {Promise<void>}
      */
     async inputUserName(username: string): Promise<void> {
+        this.logger.info('Enters user name: ' + username);
         await this.userInput.fill(username);
         await this.page.waitForLoadState('networkidle');
     }
@@ -50,6 +58,7 @@ export class loginPage extends basePage {
      * @returns {Promise<void>}
      */
     async inputPassword(password: string): Promise<void> {
+        this.logger.info('Entering password: ' + password);
         await this.passwordInput.fill(password);
         await this.page.waitForLoadState('networkidle');
     }
@@ -59,23 +68,47 @@ export class loginPage extends basePage {
      * @returns {Promise<void>}
      */
     async login(): Promise<void> {
+        this.logger.info('Click on the login button')
         await this.loginButton.click();
     }
 
     /**
-     * Checks if the locked message is visible
-     * @returns {Promise<boolean>}
+     * Clicks on next button
+     *
+     * @returns {Promise<void>}
      */
-    async hasLockedMessage(): Promise<boolean> {
-        return await this.lockedMessage.isVisible();
+    async next(): Promise<void> {
+        this.logger.info('Click on next button')
+        await this.nextButton.click();
     }
 
     /**
-     * Gets the locked message text
-     * @returns {Promise<string>}
+     * Clicks on sign up now
+     *
+     * @return {Promise<void>}
      */
-    async getLockedMessage(): Promise<string> {
-        const lockedMessage = await this.lockedMessage;
-        return await lockedMessage.textContent();
+    async signUpNow(): Promise<void> {
+        this.logger.info('Click on sign up now button')
+        await this.signUpNowButton.click();
+    }
+
+    /**
+     * Clicks on I forget my password
+     *
+     * @returns {Promise<void>}
+     */
+    async goToForgetMyPassword(): Promise<void> {
+        this.logger.info('Click on I forget my password button')
+        await this.iForgotMyPasswordButton.click();
+    }
+
+    /**
+     * Clicks on Back button
+     *
+     * @return {Promise<void>}
+     */
+    async goBack(): Promise<void> {
+        this.logger.info('Click on back button')
+        await this.backButton.click();
     }
 }

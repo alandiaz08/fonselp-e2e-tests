@@ -1,5 +1,5 @@
 {
-  "name": "electroneek-challenge",
+  "name": "fonselp-e2e-tests",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,7 @@
   "devDependencies": {
     "@playwright/test": "^1.33.0",
     "@types/jest": "^29.4.0",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "winston": "^3.9.0"
   }
 }
